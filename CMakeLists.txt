@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-
+set(CMAKE_CXX_STANDARD 17)
 
 # set(GTest_DIR "C:/Users/USERNAME/.../include/gtest")
 
@@ -11,6 +11,9 @@ cmake_minimum_required(VERSION 3.10)
 project(task_A)
 
 project(task_B)
+
+# Set debug mode for CMake
+set(CMAKE_BUILD_TYPE Debug)
 
 project(task_C)
 
