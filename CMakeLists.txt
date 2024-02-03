@@ -1,4 +1,12 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
+
+
+# set(GTest_DIR "C:/Users/USERNAME/.../include/gtest")
+
+# set(CMAKE_TOOLCHAIN_FILE "C:/Users/USERNAME/.../vcpkg.cmake"
+#   CACHE STRING "Vcpkg toolchain file")
+
+# include_directories("C:/Users/USERNAME/.../include")
 
 project(task_A)
 
@@ -23,3 +31,7 @@ add_executable(task_D taskD/main.cpp)
 add_executable(task_E taskE/main.cpp)
 
 add_executable(task_F taskF/main.cpp)
+
+# find_package(GTest REQUIRED)
+
+# target_link_libraries(task_B PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)

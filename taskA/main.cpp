@@ -1,33 +1,24 @@
 #include <iostream>
-#include <cctype>
+#include <cstring> // Include the <cstring> header for std::strlen
+#include <cctype> // Include the <cctype> header for std::isdigit, std::islower, std::isupper
+#include <cstdint> // Include the <cstdint> header for uint8_t
 
 
-bool lengthCheck(int length) 
+bool charCheck(char* userPassword, size_t length) 
 {
-    if (length < 8 || length > 14)
-        return false;
-    return true;
-}
-
-bool charCheck(char* userPassword, size_t len) 
-{
-    bool symbols, uppercase, lowercase, numbers = false;
-
-    for (int i = 0; i < len; i++) 
-    {
-        if (!numbers) {
-            numbers = (bool(std::isdigit(userPassword[i])));
-        } else if (!lowercase) {
-            lowercase = (bool(std::islower(userPassword[i])));
-        } else if (!uppercase) {
-            uppercase = (bool(std::isupper(userPassword[i])));
-        } else if (!symbols) {
-            symbols = bool(int(userPassword[i]) >= 33 && int(userPassword[i]) <= 127);
-        }
-        if (symbols + numbers + lowercase + uppercase > 2)
-            return true;
+    bool symbols = false, uppercase = false, lowercase = false, numbers = false;
+    for (int i = 0; i < length; i++) {
+        if (bool(std::islower(userPassword[i])))
+            lowercase = true;
+        else if (bool(std::isupper(userPassword[i])))
+            uppercase = true;
+        else if (bool(std::isdigit(userPassword[i])))
+            numbers = true;
+        else 
+            symbols = true;
     }
-    return false;
+    uint8_t sum = symbols + numbers + lowercase + uppercase;
+    return sum >= 3;
 }
 
 int main() 
@@ -37,11 +28,12 @@ int main()
     char input[IN_LENGTH];
 
     std::cin >> input;
-    
-    if (lengthCheck(strlen(input)) && charCheck(input, strlen(input))) {
+
+    size_t size = std::strlen(input);
+
+    if (size >= 8 && size <= 14 && (charCheck(input, std::strlen(input))))
         std::cout << "YES";
-        return 0;
-    }
-    std::cout << "NO";
+    else
+        std::cout << "NO";
     return 0;
 }
